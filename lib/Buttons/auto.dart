@@ -91,7 +91,7 @@ class _AutoState extends State<Auto> with SingleTickerProviderStateMixin {
                 child: Text('AUTO',style: TextStyle(
                   color: _colorAnimation.value,
                   fontWeight: FontWeight.w700,
-                  fontSize: 40,
+                  fontSize: 22,
                 ),
 
 

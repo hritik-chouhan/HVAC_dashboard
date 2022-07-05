@@ -90,8 +90,8 @@ class _HeartState extends State<Heart> with SingleTickerProviderStateMixin {
                 margin: const EdgeInsets.all(10),
                 child: Image(
 
-                  width: 100,
-                  height: 80,
+                  width: 80,
+                  height: 60,
                   image: Svg(widget.img),
                   color: _colorAnimation.value,
                 ),

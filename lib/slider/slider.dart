@@ -13,6 +13,7 @@ class SliderControl extends StatelessWidget {
           onChanged: (value){
                 print(value);
           },
+
         min: 0.0,
         max: 100.0,
         sliderDecoration: SliderDecoration(

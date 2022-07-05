@@ -90,7 +90,7 @@ class _ACState extends State<AC> with SingleTickerProviderStateMixin {
                 child: Text('A/C',style: TextStyle(
                   color: _colorAnimation.value,
                   fontWeight: FontWeight.w700,
-                  fontSize: 50,
+                  fontSize: 33,
                 ),
 
 
