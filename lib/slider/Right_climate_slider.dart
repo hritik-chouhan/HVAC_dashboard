@@ -7,34 +7,44 @@ class ClimateSliderControlRight extends ConsumerWidget {
   const ClimateSliderControlRight({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context,ref) {
-
+  Widget build(BuildContext context, ref) {
+    int val = ref.watch(RightSlider).toInt();
     return SizedBox(
-      height: 400,
+      height: 500,
       width: 15,
       child: RotatedBox(
         quarterTurns: 3,
-        child: SliderController(value: 0,
-          onChanged: (value){
-            ref.read(RightSlider.notifier).update(value.toInt());
-          },
-
+        child: Slider(
           min: 0,
           max: 16,
-          sliderDecoration: SliderDecoration(
-            inactiveColor: Colors.white,
-            activeColor: Colors.orangeAccent,
-            thumbColor: Colors.white,
-            borderRadius: 5.0,
-            height: 10.0,
-            isThumbVisible: true,
-            thumbHeight: 9.0,
-            thumbWidth: 5.0,
-          ),
-
+          value: val.toDouble(),
+          divisions: 16,
+          onChanged: (value) {
+            ref.read(RightSlider.notifier).update(value.toInt());
+          },
+          activeColor: Colors.orangeAccent,
+          inactiveColor: Colors.white,
+          thumbColor: Colors.blueAccent,
         ),
+        // child: SliderController(
+        //   value: 0,
+        //   onChanged: (value) {
+        //     ref.read(RightSlider.notifier).update(value.toInt());
+        //   },
+        //   min: 0,
+        //   max: 17,
+        //   sliderDecoration: SliderDecoration(
+        //     inactiveColor: Colors.white,
+        //     activeColor: Colors.orangeAccent,
+        //     thumbColor: Colors.white,
+        //     borderRadius: 5.0,
+        //     height: 10.0,
+        //     isThumbVisible: true,
+        //     thumbHeight: 9.0,
+        //     thumbWidth: 5.0,
+        //   ),
+        // ),
       ),
     );
-
   }
 }

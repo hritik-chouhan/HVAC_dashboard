@@ -6,8 +6,25 @@ import 'package:untitled/provider.dart';
 class ScrollContainerRight extends ConsumerWidget {
   ScrollContainerRight({Key? key}) : super(key: key);
 
-
-  List<int> mylist = [16, 17, 18, 19, 20, 21, 22, 23, 24,25,26,27,28,29,30,31,32];
+  List<int> mylist = [
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32
+  ];
 
   // late ItemScrollController _itemScrollController;
   //  IntialScrollController(ItemScrollController itemScrollController){
@@ -15,15 +32,11 @@ class ScrollContainerRight extends ConsumerWidget {
   //   return _itemScrollController;
   // }
   final ItemScrollController itemScrollController = ItemScrollController();
-  final ItemPositionsListener itemPositionsListener = ItemPositionsListener
-      .create();
+  final ItemPositionsListener itemPositionsListener =
+      ItemPositionsListener.create();
+
   @override
-
-
-
-
-
-  Widget build(BuildContext context,ref) {
+  Widget build(BuildContext context, ref) {
     int val = ref.watch(RightSlider).toInt();
     // _selected[val] = !_selected[val];
     // print(_selected[val]);
@@ -31,18 +44,16 @@ class ScrollContainerRight extends ConsumerWidget {
 
     print(val);
 
-    if(itemScrollController.isAttached){
+    if (itemScrollController.isAttached) {
       itemScrollController.scrollTo(
-
-          index: val.toInt()+2,
+          index: val.toInt() + 2,
           duration: Duration(milliseconds: 1000),
           curve: Curves.easeInOutCubic,
           alignment: 1);
     }
-
-
-
-
+    // itemPositionsListener.itemPositions.addListener(
+    //   () => print(ItemPosition),
+    // );
 
     return SingleChildScrollView(
       child: SizedBox(
@@ -64,20 +75,23 @@ class ScrollContainerRight extends ConsumerWidget {
               itemScrollController: itemScrollController,
               itemPositionsListener: itemPositionsListener,
               itemBuilder: (context, index) {
-
                 return Container(
-                  decoration: new BoxDecoration (
+                  decoration: BoxDecoration(
                     // color: _selected[val] ? Colors.white54 : null,
-                    gradient: index==val ? RadialGradient(colors: [Colors.white54,Colors.black], radius: 2) : null,
+                    gradient: index == val
+                        ? RadialGradient(
+                            colors: [Colors.white54, Colors.black], radius: 2)
+                        : null,
                   ),
-                  child: ListTile(subtitle: Text('    '+mylist[index].toString()+ '°',
-                    style: TextStyle(
-                      color: Colors.lightBlueAccent,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 50,
+                  child: ListTile(
+                    subtitle: Text(
+                      '    ' + mylist[index].toString() + '°',
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 59, 105, 126),
+                        fontWeight: FontWeight.w700,
+                        fontSize: 50,
+                      ),
                     ),
-
-                  ),
                     tileColor: Colors.red,
                     minVerticalPadding: 5,
                     // selectedTileColor: ,
@@ -85,14 +99,7 @@ class ScrollContainerRight extends ConsumerWidget {
                 );
               }),
         ),
-
       ),
     );
-
-
-
-
   }
-
-
 }

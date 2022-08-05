@@ -1,20 +1,29 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg_provider/flutter_svg_provider.dart';
+// import 'dart:html';
+import 'dart:io';
 
-class AC extends StatefulWidget {
-  AC({Key? key, }) : super(key: key);
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg_provider/flutter_svg_provider.dart';
+import 'package:untitled/kuksa-server/vehicle-provider.dart';
+import 'package:untitled/kuksa-server/vehicle_methods.dart';
+
+class AC extends ConsumerStatefulWidget {
+  WebSocket socket;
+  String serverPath;
+  AC({
+    Key? key,
+    required this.serverPath,
+    required this.socket,
+  }) : super(key: key);
 
   @override
   _ACState createState() => _ACState();
 }
 
-class _ACState extends State<AC> with SingleTickerProviderStateMixin {
-  bool isFav = false;
-  bool radGrad = false;
+class _ACState extends ConsumerState<AC> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
+  late bool isAcActive;
   late Animation<Color?> _colorAnimation;
-  late Animation<Color?> _colorAnimation2;
-
 
   @override
   void initState() {
@@ -25,9 +34,9 @@ class _ACState extends State<AC> with SingleTickerProviderStateMixin {
       vsync: this,
     );
 
-    _colorAnimation = ColorTween(begin: Colors.lightBlueAccent, end: Colors.white).animate(_controller);
-    _colorAnimation2 = ColorTween(begin: Colors.black, end: Colors.blueGrey).animate(_controller);
-
+    _colorAnimation =
+        ColorTween(begin: Colors.lightBlueAccent, end: Colors.white)
+            .animate(_controller);
 
     _controller.addListener(() {
       // print(_controller.value);
@@ -36,14 +45,10 @@ class _ACState extends State<AC> with SingleTickerProviderStateMixin {
 
     _controller.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
-        setState(() {
-          isFav = true;
-        });
+        VISS.set(widget.socket, widget.serverPath, isAcActive.toString());
       }
       if (status == AnimationStatus.dismissed) {
-        setState(() {
-          isFav = false;
-        });
+        VISS.set(widget.socket, widget.serverPath, isAcActive.toString());
       }
     });
   }
@@ -57,11 +62,11 @@ class _ACState extends State<AC> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    isAcActive = ref.watch(vehicleProvider).isAcActive;
     return AnimatedBuilder(
         animation: _controller,
-        builder: (BuildContext context, _){
+        builder: (BuildContext context, _) {
           return InkWell(
-
             child: AnimatedContainer(
               constraints: BoxConstraints(
                 maxHeight: 150,
@@ -70,10 +75,12 @@ class _ACState extends State<AC> with SingleTickerProviderStateMixin {
               // color: Colors.black, //background color of box
 
               decoration: BoxDecoration(
-                gradient: radGrad? RadialGradient(colors: [Colors.black,Colors.lightBlue],
-                  radius: 2,
-                ) : null,
-
+                gradient: isAcActive
+                    ? RadialGradient(
+                        colors: [Colors.black, Colors.lightBlue],
+                        radius: 2,
+                      )
+                    : null,
 
                 // color: _colorAnimation2.value,
                 border: Border.all(
@@ -84,27 +91,23 @@ class _ACState extends State<AC> with SingleTickerProviderStateMixin {
               ),
               duration: Duration(seconds: 1),
               child: AnimatedContainer(
-
                 duration: Duration(milliseconds: 100),
                 margin: EdgeInsets.all(20),
-                child: Text('A/C',style: TextStyle(
-                  color: _colorAnimation.value,
-                  fontWeight: FontWeight.w700,
-                  fontSize: 33,
-                ),
-
-
+                child: Text(
+                  'A/C',
+                  style: TextStyle(
+                    color: _colorAnimation.value,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 33,
+                  ),
                 ),
               ),
-
-
             ),
-            onTap: (){
-              isFav ? _controller.reverse() : _controller.forward();
-              setState(() {
-                radGrad = !radGrad;
-              });
-
+            onTap: () {
+              isAcActive ? _controller.reverse() : _controller.forward();
+              ref
+                  .read(vehicleProvider.notifier)
+                  .update(isAcActive: !isAcActive);
             },
           );
           // return IconButton(
@@ -117,7 +120,6 @@ class _ACState extends State<AC> with SingleTickerProviderStateMixin {
           //     isFav ? _controller.reverse() : _controller.forward();
           //   },
           // );
-        }
-    );
+        });
   }
 }

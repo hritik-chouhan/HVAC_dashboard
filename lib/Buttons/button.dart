@@ -1,21 +1,31 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 
+import '../kuksa-server/vehicle_server_path.dart';
+import '../kuksa-server/vehicle_methods.dart';
+
 class Heart extends StatefulWidget {
   final String img;
-  Heart({Key? key, required this.img}) : super(key: key);
+  WebSocket socket;
+  final String serverPath;
+  Heart(
+      {Key? key,
+      required this.img,
+      required this.socket,
+      required this.serverPath})
+      : super(key: key);
 
   @override
   _HeartState createState() => _HeartState();
 }
 
 class _HeartState extends State<Heart> with SingleTickerProviderStateMixin {
-  bool isFav = false;
+  bool isOn = false;
   bool radGrad = false;
   late AnimationController _controller;
   late Animation<Color?> _colorAnimation;
-  late Animation<Color?> _colorAnimation2;
-
 
   @override
   void initState() {
@@ -26,25 +36,24 @@ class _HeartState extends State<Heart> with SingleTickerProviderStateMixin {
       vsync: this,
     );
 
-    _colorAnimation = ColorTween(begin: Colors.lightBlueAccent, end: Colors.white).animate(_controller);
-    _colorAnimation2 = ColorTween(begin: Colors.black, end: Colors.blueGrey).animate(_controller);
+    _colorAnimation =
+        ColorTween(begin: Colors.lightBlueAccent, end: Colors.white)
+            .animate(_controller);
 
-
-    _controller.addListener(() {
-      // print(_controller.value);
-      // print(_colorAnimation.value);
-    });
+    _controller.addListener(() {});
 
     _controller.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
         setState(() {
-          isFav = true;
+          isOn = true;
         });
+        VISS.set(widget.socket, widget.serverPath, 'up');
       }
       if (status == AnimationStatus.dismissed) {
         setState(() {
-          isFav = false;
+          isOn = false;
         });
+        VISS.set(widget.socket, widget.serverPath, 'middle');
       }
     });
   }
@@ -60,9 +69,8 @@ class _HeartState extends State<Heart> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     return AnimatedBuilder(
         animation: _controller,
-        builder: (BuildContext context, _){
+        builder: (BuildContext context, _) {
           return InkWell(
-
             child: AnimatedContainer(
               constraints: BoxConstraints(
                 maxHeight: 150,
@@ -71,40 +79,38 @@ class _HeartState extends State<Heart> with SingleTickerProviderStateMixin {
               // color: Colors.black, //background color of box
 
               decoration: BoxDecoration(
-                gradient: radGrad? RadialGradient(colors: [Colors.black,Colors.lightBlue],
-                  radius: 2,
-                ) : null,
-
+                gradient: radGrad
+                    ? RadialGradient(
+                        colors: [Colors.black, Colors.lightBlue],
+                        radius: 2,
+                      )
+                    : null,
 
                 // color: _colorAnimation2.value,
                 border: Border.all(
-                color: Colors.white,
-                width: 2,
-              ),
-              borderRadius: BorderRadius.circular(12),
+                  color: Colors.white,
+                  width: 2,
+                ),
+                borderRadius: BorderRadius.circular(12),
               ),
               duration: const Duration(milliseconds: 500),
               child: AnimatedContainer(
-
                 duration: Duration(milliseconds: 100),
                 margin: const EdgeInsets.all(10),
                 child: Image(
-
                   width: 80,
                   height: 60,
                   image: Svg(widget.img),
                   color: _colorAnimation.value,
                 ),
               ),
-
-
             ),
-            onTap: (){
-                  isFav ? _controller.reverse() : _controller.forward();
-                  setState(() {
-                    radGrad = !radGrad;
-                  });
+            onTap: () {
+              isOn ? _controller.reverse() : _controller.forward();
 
+              setState(() {
+                radGrad = !radGrad;
+              });
             },
           );
           // return IconButton(
@@ -114,10 +120,9 @@ class _HeartState extends State<Heart> with SingleTickerProviderStateMixin {
           //     size: 30,
           //   ),
           //   onPressed: () {
-          //     isFav ? _controller.reverse() : _controller.forward();
+          //     isOn ? _controller.reverse() : _controller.forward();
           //   },
           // );
-        }
-    );
+        });
   }
 }
