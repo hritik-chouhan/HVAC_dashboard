@@ -9,24 +9,20 @@ import '../kuksa-server/vehicle-class.dart';
 import '../kuksa-server/vehicle_server_path.dart';
 import '../kuksa-server/vehicle_methods.dart';
 
-class Heart extends ConsumerStatefulWidget {
+class AcOnFoot extends ConsumerStatefulWidget {
   final String img;
   WebSocket socket;
-  final String type;
-  final String serverPath;
-  Heart({
+  AcOnFoot({
     Key? key,
     required this.img,
     required this.socket,
-    required this.serverPath,
-    required this.type,
   }) : super(key: key);
 
   @override
-  _HeartState createState() => _HeartState();
+  _AcOnFootState createState() => _AcOnFootState();
 }
 
-class _HeartState extends ConsumerState<Heart>
+class _AcOnFootState extends ConsumerState<AcOnFoot>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<Color?> _colorAnimation;
@@ -48,23 +44,26 @@ class _HeartState extends ConsumerState<Heart>
 
     _controller.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
-        if (widget.type == "up") {
-          VISS.set(widget.socket, widget.serverPath, 'up');
-        }
+        VISS.set(widget.socket,
+            "Vehicle.Cabin.HVAC.Station.Row1.Left.AirDistribution", 'down');
+        VISS.set(widget.socket,
+            "Vehicle.Cabin.HVAC.Station.Row1.Right.AirDistribution", 'down');
+        VISS.set(widget.socket,
+            "Vehicle.Cabin.HVAC.Station.Row2.Left.AirDistribution", 'down');
+        VISS.set(widget.socket,
+            "Vehicle.Cabin.HVAC.Station.Row2.Right.AirDistribution", 'down');
 
-        if (widget.type == "down") {
-          VISS.set(widget.socket, widget.serverPath, 'down');
-        }
       }
 
       if (status == AnimationStatus.dismissed) {
-        if (widget.type == "up") {
-          VISS.set(widget.socket, widget.serverPath, 'middle');
-        }
-
-        if (widget.type == "down") {
-          VISS.set(widget.socket, widget.serverPath, 'middle');
-        }
+        VISS.set(widget.socket,
+            "Vehicle.Cabin.HVAC.Station.Row1.Left.AirDistribution", 'middle');
+        VISS.set(widget.socket,
+            "Vehicle.Cabin.HVAC.Station.Row1.Right.AirDistribution", 'middle');
+        VISS.set(widget.socket,
+            "Vehicle.Cabin.HVAC.Station.Row2.Left.AirDistribution", 'middle');
+        VISS.set(widget.socket,
+            "Vehicle.Cabin.HVAC.Station.Row2.Right.AirDistribution", 'middle');
       }
     });
   }
@@ -79,6 +78,9 @@ class _HeartState extends ConsumerState<Heart>
   @override
   Widget build(BuildContext context) {
     vehicle vehicledata = ref.watch(vehicleProvider);
+    if (vehicledata.isAcDirectionDown == false) {
+      _controller.reverse();
+    }
 
     return AnimatedBuilder(
         animation: _controller,
@@ -92,21 +94,12 @@ class _HeartState extends ConsumerState<Heart>
               // color: Colors.black, //background color of box
 
               decoration: BoxDecoration(
-                gradient: widget.type == "up"
-                    ? vehicledata.isAcDirectionUp
-                        ? RadialGradient(
-                            colors: [Colors.black, Colors.lightBlue],
-                            radius: 2,
-                          )
-                        : null
-                    : widget.type == " down"
-                        ? vehicledata.isAcDirectionDown
-                            ? RadialGradient(
-                                colors: [Colors.black, Colors.lightBlue],
-                                radius: 2,
-                              )
-                            : null
-                        : null,
+                gradient: vehicledata.isAcDirectionDown
+                    ? RadialGradient(
+                        colors: [Colors.black, Colors.lightBlue],
+                        radius: 2,
+                      )
+                    : null,
 
                 // color: _colorAnimation2.value,
                 border: Border.all(
@@ -128,29 +121,21 @@ class _HeartState extends ConsumerState<Heart>
               ),
             ),
             onTap: () {
-              if (widget.type == "up") {
-                vehicledata.isAcDirectionUp
-                    ? _controller.reverse()
-                    : _controller.forward();
-                if(vehicledata.isAcDirectionUp == false && vehicledata.isAcDirectionDown == true){
-                   ref
+              if (vehicledata.isAcDirectionUp == true) {
+                ref
                     .watch(vehicleProvider.notifier)
-                    .update(isAcDirectionUp: !vehicledata.isAcDirectionUp,
-                    isAcDirectionDown: !vehicledata.isAcDirectionDown,
-                    );
-                }
-                
-               
+                    .update(isAcDirectionUp: !vehicledata.isAcDirectionUp);
               }
-
-              if (widget.type == "down") {
+              Future.delayed(Duration(milliseconds: 500),(){
                 vehicledata.isAcDirectionDown
                     ? _controller.reverse()
                     : _controller.forward();
-                ref
-                    .watch(vehicleProvider.notifier)
-                    .update(isAcDirectionDown: !vehicledata.isAcDirectionDown);
-              }
+
+                ref.watch(vehicleProvider.notifier).update(
+                  isAcDirectionDown: !vehicledata.isAcDirectionDown,
+                );
+              });
+
             },
           );
           // return IconButton(

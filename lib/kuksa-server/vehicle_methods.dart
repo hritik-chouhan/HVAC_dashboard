@@ -79,7 +79,11 @@ class VISS {
     socket.add(jsonEncode(map));
   }
 
-  static void set(WebSocket socket, String path, String value) {
+  static void set(
+    WebSocket socket,
+    String path,
+    String value,
+  ) {
     Map<String, dynamic> map = {
       "action": "set",
       "tokens": VehicleSignalConfig.authToken,

@@ -4,8 +4,11 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:untitled/Buttons/AC.dart';
+import 'package:untitled/Buttons/ac_on_face.dart';
+import 'package:untitled/Buttons/ac_on_foot.dart';
 import 'package:untitled/Buttons/button.dart';
 import 'package:untitled/Buttons/defrost_recirculate.dart';
+import 'package:untitled/size.dart';
 import 'package:untitled/slider/Climate_slider.dart';
 import 'package:untitled/slider/Right_climate_slider.dart';
 import 'Buttons/auto.dart';
@@ -20,6 +23,7 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     print(height);
@@ -40,27 +44,26 @@ class MyHomePage extends StatelessWidget {
         Positioned(
             bottom: 180,
             left: 10,
-            child: Heart(
+            child: AcOnFoot(
               img: 'images/ac_on_foot.svg',
               socket: socket,
-              serverPath: 'abc',
             )),
         Positioned(
             bottom: 90,
             left: 10,
-            child: Heart(
+            child: AcOnFace(
               img: 'images/ac_on_face.svg',
               socket: socket,
-              serverPath: VSPath.vehicleFrontLeftAc,
             )),
-        Positioned(
-            bottom: 0,
-            left: 10,
-            child: Heart(
-              img: 'images/face_foot.svg',
-              serverPath: 'abc',
-              socket: socket,
-            )),
+        // Positioned(
+        //     bottom: 0,
+        //     left: 10,
+        //     child: Heart(
+        //       img: 'images/face_foot.svg',
+        //       serverPath: 'abc',
+        //       socket: socket,
+        //       type: 'middle',
+        //     )),
 
         Positioned(
           left: width / 3,
@@ -68,7 +71,7 @@ class MyHomePage extends StatelessWidget {
           bottom: 45,
           child: Row(
             children: [
-              Auto(),
+              // Auto(),
               SizedBox(
                 width: 10,
               ),
@@ -78,11 +81,12 @@ class MyHomePage extends StatelessWidget {
               SizedBox(
                 width: 10,
               ),
-              Heart(
-                img: 'images/in_out.svg',
-                socket: socket,
-                serverPath: 'abc',
-              ),
+              // Heart(
+              //   img: 'images/in_out.svg',
+              //   socket: socket,
+              //   serverPath: 'abc',
+              //   type: 'fresh',
+              // ),
             ],
           ),
         ),
@@ -124,7 +128,7 @@ class MyHomePage extends StatelessWidget {
           child: CaustomButton(
               serverPath: 'Vehicle.Cabin.HVAC.IsRecirculationActive',
               socket: socket,
-              img: 'images/wind_in.svg',
+              img: 'images/in_out.svg',
               type: 'Recirculation'),
         ),
         Positioned(
@@ -142,7 +146,12 @@ class MyHomePage extends StatelessWidget {
               type: 'Rear_defrost'),
         ),
 
-        Positioned(bottom: 180, left: width * 3.5 / 10, child: SliderControl()),
+        Positioned(
+            bottom: 180,
+            left: width * 3.5 / 10,
+            child: SliderControl(
+              socket: socket,
+            )),
         Positioned(
           bottom: 100,
           left: width * 1.8 / 10,
@@ -189,7 +198,9 @@ class MyHomePage extends StatelessWidget {
                 SizedBox(
                   height: 5,
                 ),
-                ScrollContainerLeft(),
+                ScrollContainerLeft(
+                  socket: socket,
+                ),
               ],
             )),
         Positioned(
@@ -203,22 +214,19 @@ class MyHomePage extends StatelessWidget {
                 Text(
                   'R CLIMATE',
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: SizeConfig.fontsize,
                     fontWeight: FontWeight.w700,
                     color: Colors.orangeAccent,
                   ),
                 ),
                 SizedBox(
-                  height: 5,
-                ),
-                SizedBox(
-                    height: height * 0.15,
-                    width: width * 0.15,
+                    height: SizeConfig.screenHeight/10,
+                    width: SizeConfig.screenWidth/10,
                     child: Image.asset('images/right_climate.PNG')),
-                SizedBox(
-                  height: 5,
+
+                ScrollContainerRight(
+                  socket: socket,
                 ),
-                ScrollContainerRight(),
               ],
             )),
         Positioned(

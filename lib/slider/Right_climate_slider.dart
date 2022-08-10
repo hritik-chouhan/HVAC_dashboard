@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:slider_controller/slider_controller.dart';
 import 'package:untitled/provider.dart';
 
+import '../size.dart';
+
 class ClimateSliderControlRight extends ConsumerWidget {
   const ClimateSliderControlRight({Key? key}) : super(key: key);
 
@@ -10,15 +12,15 @@ class ClimateSliderControlRight extends ConsumerWidget {
   Widget build(BuildContext context, ref) {
     int val = ref.watch(RightSlider).toInt();
     return SizedBox(
-      height: 500,
-      width: 15,
+      height: SizeConfig.screenHeight*0.35,
+      width: SizeConfig.blockSizeHorizontal*3,
       child: RotatedBox(
         quarterTurns: 3,
         child: Slider(
           min: 0,
-          max: 16,
+          max: 15,
           value: val.toDouble(),
-          divisions: 16,
+          divisions: 15,
           onChanged: (value) {
             ref.read(RightSlider.notifier).update(value.toInt());
           },

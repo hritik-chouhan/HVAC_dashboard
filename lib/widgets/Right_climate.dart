@@ -1,10 +1,15 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
+import 'package:untitled/kuksa-server/vehicle_methods.dart';
 import 'package:untitled/provider.dart';
+import 'package:untitled/size.dart';
 
 class ScrollContainerRight extends ConsumerWidget {
-  ScrollContainerRight({Key? key}) : super(key: key);
+  WebSocket socket;
+  ScrollContainerRight({Key? key, required this.socket}) : super(key: key);
 
   List<int> mylist = [
     16,
@@ -23,7 +28,7 @@ class ScrollContainerRight extends ConsumerWidget {
     29,
     30,
     31,
-    32
+    32,
   ];
 
   // late ItemScrollController _itemScrollController;
@@ -41,13 +46,17 @@ class ScrollContainerRight extends ConsumerWidget {
     // _selected[val] = !_selected[val];
     // print(_selected[val]);
     // print(_selected[val+1]);
-
+    // 'Vehicle.Cabin.HVAC.Station.Row1.Right.Temperature'
+    VISS.set(socket, 'Vehicle.Cabin.HVAC.Station.Row1.Right.Temperature',
+        mylist[val].toString());
+    VISS.set(socket, 'Vehicle.Cabin.HVAC.Station.Row2.Right.Temperature',
+        mylist[val].toString());
     print(val);
 
     if (itemScrollController.isAttached) {
       itemScrollController.scrollTo(
-          index: val.toInt() + 2,
-          duration: Duration(milliseconds: 1000),
+          index: val.toInt()+2,
+          duration: Duration(milliseconds: 500),
           curve: Curves.easeInOutCubic,
           alignment: 1);
     }
@@ -57,11 +66,11 @@ class ScrollContainerRight extends ConsumerWidget {
 
     return SingleChildScrollView(
       child: SizedBox(
-        height: 200,
-        width: 200,
+        height: SizeConfig.screenHeight*0.30,
+        width: SizeConfig.screenWidth*0.25,
         child: AnimatedContainer(
           // color: Colors.red,
-          duration: Duration(milliseconds: 500),
+          duration: Duration(milliseconds: 300),
           decoration: BoxDecoration(
             border: Border.all(
               color: Colors.white,
@@ -70,6 +79,7 @@ class ScrollContainerRight extends ConsumerWidget {
             borderRadius: BorderRadius.circular(12),
           ),
           child: ScrollablePositionedList.builder(
+            physics: NeverScrollableScrollPhysics(),
               scrollDirection: Axis.vertical,
               itemCount: mylist.length,
               itemScrollController: itemScrollController,
@@ -89,10 +99,10 @@ class ScrollContainerRight extends ConsumerWidget {
                       style: TextStyle(
                         color: Color.fromARGB(255, 59, 105, 126),
                         fontWeight: FontWeight.w700,
-                        fontSize: 50,
+                        fontSize: SizeConfig.fontsize*3.5,
                       ),
                     ),
-                    tileColor: Colors.red,
+                    // tileColor: Colors.red,
                     minVerticalPadding: 5,
                     // selectedTileColor: ,
                   ),
