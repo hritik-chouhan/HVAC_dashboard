@@ -7,6 +7,8 @@ import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:untitled/kuksa-server/vehicle-provider.dart';
 import 'package:untitled/kuksa-server/vehicle_methods.dart';
 
+import '../size.dart';
+
 class AC extends ConsumerStatefulWidget {
   WebSocket socket;
   String serverPath;
@@ -69,8 +71,8 @@ class _ACState extends ConsumerState<AC> with SingleTickerProviderStateMixin {
           return InkWell(
             child: AnimatedContainer(
               constraints: BoxConstraints(
-                maxHeight: 150,
-                maxWidth: 200,
+                maxHeight: SizeConfig.screenHeight*0.10,
+                maxWidth: SizeConfig.screenWidth*0.12,
               ),
               // color: Colors.black, //background color of box
 
@@ -92,13 +94,20 @@ class _ACState extends ConsumerState<AC> with SingleTickerProviderStateMixin {
               duration: Duration(seconds: 1),
               child: AnimatedContainer(
                 duration: Duration(milliseconds: 100),
-                margin: EdgeInsets.all(20),
-                child: Text(
-                  'A/C',
-                  style: TextStyle(
-                    color: _colorAnimation.value,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 33,
+                margin: EdgeInsets.all(SizeConfig.blockSizeVertical*2),
+                child: Container(
+                  width: SizeConfig.screenWidth*0.12,
+                  height: SizeConfig.screenHeight*0.10,
+                  child: FittedBox(
+                    fit: BoxFit.fill,
+                    child: Text(
+                      'A/C',
+                      style: TextStyle(
+                        color: _colorAnimation.value,
+                        fontWeight: FontWeight.w700,
+                        // fontSize: SizeConfig.fontsize*4,
+                      ),
+                    ),
                   ),
                 ),
               ),

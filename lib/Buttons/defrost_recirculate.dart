@@ -7,6 +7,7 @@ import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:untitled/kuksa-server/vehicle-class.dart';
 import 'package:untitled/kuksa-server/vehicle-provider.dart';
 import 'package:untitled/kuksa-server/vehicle_methods.dart';
+import 'package:untitled/size.dart';
 
 class CaustomButton extends ConsumerStatefulWidget {
   WebSocket socket;
@@ -101,8 +102,8 @@ class _CaustomButtonState extends ConsumerState<CaustomButton>
           return InkWell(
             child: AnimatedContainer(
               constraints: BoxConstraints(
-                maxHeight: 150,
-                maxWidth: 200,
+                maxHeight: SizeConfig.screenHeight*0.10,
+                maxWidth: SizeConfig.screenWidth*0.12,
               ),
               // color: Colors.black, //background color of box
 
@@ -135,13 +136,13 @@ class _CaustomButtonState extends ConsumerState<CaustomButton>
                 ),
                 borderRadius: BorderRadius.circular(12),
               ),
-              duration: Duration(seconds: 1),
+              duration: Duration(milliseconds: 100),
               child: AnimatedContainer(
                 duration: Duration(milliseconds: 100),
-                margin: EdgeInsets.all(20),
+                margin: EdgeInsets.all(SizeConfig.blockSizeVertical),
                 child: Image(
-                  width: 80,
-                  height: 60,
+                  width: SizeConfig.screenWidth*0.12,
+                  height: SizeConfig.screenHeight*0.10,
                   image: Svg(widget.img),
                   color: _colorAnimation.value,
                 ),

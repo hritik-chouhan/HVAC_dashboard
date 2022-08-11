@@ -90,16 +90,22 @@ class ScrollContainerRight extends ConsumerWidget {
                     // color: _selected[val] ? Colors.white54 : null,
                     gradient: index == val
                         ? RadialGradient(
-                            colors: [Colors.white54, Colors.black], radius: 2)
+                            colors: [Colors.white54, Colors.black], radius: SizeConfig.safeBlockVertical*0.7)
                         : null,
                   ),
                   child: ListTile(
-                    subtitle: Text(
-                      '    ' + mylist[index].toString() + '°',
-                      style: TextStyle(
-                        color: Color.fromARGB(255, 59, 105, 126),
-                        fontWeight: FontWeight.w700,
-                        fontSize: SizeConfig.fontsize*3.5,
+                    subtitle: Center(
+                      child: Text(
+                        '' + mylist[index].toString() + '°',
+                        style: index == val ? TextStyle(
+                          color: Colors.lightBlueAccent,
+                          fontWeight: FontWeight.w700,
+                          fontSize: SizeConfig.fontsize*12,
+                        ):TextStyle(
+                          color: Colors.white54,
+                          fontWeight: FontWeight.w700,
+                          fontSize: SizeConfig.fontsize*12,
+                        ),
                       ),
                     ),
                     // tileColor: Colors.red,

@@ -8,6 +8,7 @@ import 'package:untitled/kuksa-server/vehicle-provider.dart';
 import '../kuksa-server/vehicle-class.dart';
 import '../kuksa-server/vehicle_server_path.dart';
 import '../kuksa-server/vehicle_methods.dart';
+import '../size.dart';
 
 class AcOnFoot extends ConsumerStatefulWidget {
   final String img;
@@ -88,8 +89,8 @@ class _AcOnFootState extends ConsumerState<AcOnFoot>
           return InkWell(
             child: AnimatedContainer(
               constraints: BoxConstraints(
-                maxHeight: 150,
-                maxWidth: 200,
+                maxHeight: SizeConfig.screenHeight*0.10,
+                maxWidth: SizeConfig.screenWidth*0.12,
               ),
               // color: Colors.black, //background color of box
 
@@ -113,8 +114,8 @@ class _AcOnFootState extends ConsumerState<AcOnFoot>
                 duration: Duration(milliseconds: 100),
                 margin: const EdgeInsets.all(10),
                 child: Image(
-                  width: 80,
-                  height: 60,
+                  width: SizeConfig.screenWidth*0.12,
+                  height: SizeConfig.screenHeight*0.10,
                   image: Svg(widget.img),
                   color: _colorAnimation.value,
                 ),

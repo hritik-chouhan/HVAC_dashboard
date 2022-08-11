@@ -38,43 +38,20 @@ class MyHome_Page extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      ClimateSliderControlRight(),
-                      SizedBox(width: SizeConfig.blockSizeHorizontal*2,),
-                      Column(
-                        children: [
-                          Text(
-                            'R CLIMATE',
-                            style: TextStyle(
-                              fontSize: SizeConfig.fontsize,
-                              fontWeight: FontWeight.w700,
-                              color: Colors.orangeAccent,
-                            ),
-                          ),
-                          SizedBox(
-                              height: SizeConfig.screenHeight/10,
-                              width: SizeConfig.screenWidth/10,
-                              child: Image.asset('images/right_climate.PNG')),
 
-                          ScrollContainerRight(
-                            socket: socket,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
+                      ClimateSliderControlLeft(),
+                      SizedBox(width: SizeConfig.blockSizeHorizontal*4,),
+
 
                       Column(
                         children: [
                           Text(
                             'L CLIMATE',
                             style: TextStyle(
-                              fontSize: SizeConfig.fontsize,
+                              fontSize: SizeConfig.fontsize*4,
                               fontWeight: FontWeight.w700,
-                              color: Colors.orangeAccent,
+                              color: Colors.lightBlueAccent,
                             ),
                           ),
 
@@ -88,20 +65,51 @@ class MyHome_Page extends StatelessWidget {
                           ),
                         ],
                       ),
-                      ClimateSliderControlLeft(),
+
 
                     ],
                   ),
+                  Row(
+                    // mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+
+                      Column(
+                        children: [
+                          Text(
+                            'R CLIMATE',
+                            style: TextStyle(
+                              fontSize: SizeConfig.fontsize*4,
+                              fontWeight: FontWeight.w700,
+                              color: Colors.lightBlueAccent,
+                            ),
+                          ),
+                          SizedBox(
+                              height: SizeConfig.screenHeight/10,
+                              width: SizeConfig.screenWidth/10,
+                              child: Image.asset('images/right_climate.PNG')),
+
+                          ScrollContainerRight(
+                            socket: socket,
+                          ),
+                        ],
+                      ),
+                      SizedBox(width: SizeConfig.blockSizeHorizontal*4,),
+
+                      ClimateSliderControlRight(),
+                    ],
+                  ),
+
                 ],
               )),
           Flexible(
             flex: 2,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image(
-                    width: SizeConfig.screenWidth*0.25,
-                    height: SizeConfig.screenHeight*0.20,
+                    width: SizeConfig.screenWidth*0.20,
+                    height: SizeConfig.screenHeight*0.25,
                     image: Svg('images/fan.svg'),
                     color: Colors.lightBlueAccent,
                   ),
@@ -120,10 +128,14 @@ class MyHome_Page extends StatelessWidget {
                       AC(
                           socket: socket,
                           serverPath: 'Vehicle.Cabin.HVAC.IsAirConditioningActive'),
+                      SizedBox(height: SizeConfig.safeBlockVertical,),
+
                       AcOnFoot(
                         img: 'images/ac_on_foot.svg',
                         socket: socket,
                       ),
+                      SizedBox(height: SizeConfig.safeBlockVertical,),
+
                       AcOnFace(
                         img: 'images/ac_on_face.svg',
                         socket: socket,
@@ -137,11 +149,14 @@ class MyHome_Page extends StatelessWidget {
                           socket: socket,
                           img: 'images/in_out.svg',
                           type: 'Recirculation'),
+                      SizedBox(height: SizeConfig.safeBlockVertical,),
                       CaustomButton(
                           serverPath: 'Vehicle.Cabin.HVAC.IsRearDefrosterActive',
                           socket: socket,
                           img: 'images/rear_ws.svg',
                           type: 'Rear_defrost'),
+                      SizedBox(height: SizeConfig.safeBlockVertical,),
+
                       CaustomButton(
                           serverPath: 'Vehicle.Cabin.HVAC.IsFrontDefrosterActive',
                           socket: socket,
