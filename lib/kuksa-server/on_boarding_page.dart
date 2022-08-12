@@ -1,13 +1,11 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:untitled/kuksa-server/vehicle_config.dart';
 import 'package:untitled/kuksa-server/vehicle_methods.dart';
 
-import '../HomePage.dart';
 import '../home_page.dart';
 
 class OnBoardingPage extends ConsumerStatefulWidget {
