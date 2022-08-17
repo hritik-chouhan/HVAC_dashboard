@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:slider_controller/slider_controller.dart';
-import 'package:untitled/provider.dart';
+import 'package:flutter_hvac/provider.dart';
 
+import '../provider.dart';
 import '../size.dart';
 
 class ClimateSliderControlLeft extends ConsumerWidget {

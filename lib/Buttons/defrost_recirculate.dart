@@ -4,10 +4,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
-import 'package:untitled/kuksa-server/vehicle-class.dart';
-import 'package:untitled/kuksa-server/vehicle-provider.dart';
-import 'package:untitled/kuksa-server/vehicle_methods.dart';
-import 'package:untitled/size.dart';
+import 'package:flutter_hvac/kuksa-server/vehicle-class.dart';
+import 'package:flutter_hvac/kuksa-server/vehicle-provider.dart';
+import 'package:flutter_hvac/kuksa-server/vehicle_methods.dart';
+import 'package:flutter_hvac/size.dart';
 
 class CaustomButton extends ConsumerStatefulWidget {
   WebSocket socket;

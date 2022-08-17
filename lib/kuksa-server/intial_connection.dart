@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:untitled/kuksa-server/vehicle_config.dart';
+import 'package:flutter_hvac/kuksa-server/vehicle_config.dart';
 
 import 'on_boarding_page.dart';
 

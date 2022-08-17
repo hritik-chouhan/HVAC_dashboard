@@ -3,9 +3,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
-import 'package:untitled/kuksa-server/vehicle_methods.dart';
-import 'package:untitled/provider.dart';
-import 'package:untitled/size.dart';
+import 'package:flutter_hvac/kuksa-server/vehicle_methods.dart';
+import 'package:flutter_hvac/provider.dart';
+import 'package:flutter_hvac/size.dart';
 
 class ScrollContainerRight extends ConsumerWidget {
   WebSocket socket;

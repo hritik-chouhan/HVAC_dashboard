@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
-import 'package:untitled/provider.dart';
+import 'package:flutter_hvac/provider.dart';
 import 'dart:io';
 
 import '../kuksa-server/vehicle_methods.dart';

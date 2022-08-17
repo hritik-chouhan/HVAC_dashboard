@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:untitled/kuksa-server/vehicle-class.dart';
+import 'package:flutter_hvac/kuksa-server/vehicle-class.dart';
 
 final vehicleProvider = StateNotifierProvider<VehicleSignal, vehicle>(
   (ref) => VehicleSignal(),

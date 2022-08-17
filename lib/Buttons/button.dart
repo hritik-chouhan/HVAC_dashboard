@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
-import 'package:untitled/kuksa-server/vehicle-provider.dart';
+import 'package:flutter_hvac/kuksa-server/vehicle-provider.dart';
 
 import '../kuksa-server/vehicle-class.dart';
 import '../kuksa-server/vehicle_server_path.dart';

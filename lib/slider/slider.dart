@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:slider_controller/slider_controller.dart';
-import 'package:untitled/provider.dart';
+import 'package:flutter_hvac/provider.dart';
 
 import '../kuksa-server/vehicle_methods.dart';
 import '../size.dart';
