@@ -96,11 +96,11 @@ class ScrollContainerLeft extends ConsumerWidget {
                         style: index == val ? TextStyle(
                           color: Colors.lightBlueAccent,
                           fontWeight: FontWeight.w700,
-                          fontSize: SizeConfig.fontsize*8,
+                          fontSize: SizeConfig.fontsize*4,
                         ):TextStyle(
                           color: Colors.white54,
                           fontWeight: FontWeight.w700,
-                          fontSize: SizeConfig.fontsize*8,
+                          fontSize: SizeConfig.fontsize*4,
                         ),
                       ),
                     ),

@@ -80,7 +80,7 @@ class _AutoState extends ConsumerState<Auto> with SingleTickerProviderStateMixin
                 gradient: isAutoActive
                     ? RadialGradient(
                   colors: [Colors.black, Colors.lightBlue],
-                  radius: 2,
+                  radius: SizeConfig.safeBlockVertical/2,
                 )
                     : null,
 
@@ -89,7 +89,7 @@ class _AutoState extends ConsumerState<Auto> with SingleTickerProviderStateMixin
                   color: Colors.white,
                   width: 2,
                 ),
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(SizeConfig.safeBlockVertical*2),
               ),
               duration: Duration(seconds: 1),
               child: AnimatedContainer(

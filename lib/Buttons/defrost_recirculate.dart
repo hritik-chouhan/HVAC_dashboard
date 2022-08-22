@@ -119,7 +119,7 @@ class _CaustomButtonState extends ConsumerState<CaustomButton>
                         ? vehicledata.isRearDefrosterActive
                             ? RadialGradient(
                                 colors: [Colors.black, Colors.lightBlue],
-                                radius: 2,
+                                radius: SizeConfig.safeBlockVertical/2,
                               )
                             : null
                         : vehicledata.isRecirculationActive
@@ -134,7 +134,7 @@ class _CaustomButtonState extends ConsumerState<CaustomButton>
                   color: Colors.white,
                   width: 2,
                 ),
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(SizeConfig.safeBlockVertical*2),
               ),
               duration: Duration(milliseconds: 100),
               child: AnimatedContainer(
