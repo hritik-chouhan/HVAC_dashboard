@@ -103,7 +103,7 @@ class _CaustomButtonState extends ConsumerState<CaustomButton>
             child: AnimatedContainer(
               constraints: BoxConstraints(
                 maxHeight: SizeConfig.screenHeight*0.10,
-                maxWidth: SizeConfig.screenWidth*0.12,
+                maxWidth: SizeConfig.screenWidth*0.15,
               ),
               // color: Colors.black, //background color of box
 
@@ -141,7 +141,7 @@ class _CaustomButtonState extends ConsumerState<CaustomButton>
                 duration: Duration(milliseconds: 100),
                 margin: EdgeInsets.all(SizeConfig.blockSizeVertical),
                 child: Image(
-                  width: SizeConfig.screenWidth*0.12,
+                  width: SizeConfig.screenWidth*0.15,
                   height: SizeConfig.screenHeight*0.10,
                   image: Svg(widget.img),
                   color: _colorAnimation.value,

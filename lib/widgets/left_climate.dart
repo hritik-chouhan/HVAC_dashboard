@@ -82,7 +82,7 @@ class ScrollContainerLeft extends ConsumerWidget {
               itemPositionsListener: itemPositionsListener,
               itemBuilder: (context, index) {
                 return Container(
-                  decoration: new BoxDecoration(
+                  decoration: BoxDecoration(
                     // color: _selected[val] ? Colors.white54 : null,
                     gradient: index == val
                         ? RadialGradient(
@@ -96,11 +96,11 @@ class ScrollContainerLeft extends ConsumerWidget {
                         style: index == val ? TextStyle(
                           color: Colors.lightBlueAccent,
                           fontWeight: FontWeight.w700,
-                          fontSize: SizeConfig.fontsize*12,
+                          fontSize: SizeConfig.fontsize*8,
                         ):TextStyle(
                           color: Colors.white54,
                           fontWeight: FontWeight.w700,
-                          fontSize: SizeConfig.fontsize*12,
+                          fontSize: SizeConfig.fontsize*8,
                         ),
                       ),
                     ),

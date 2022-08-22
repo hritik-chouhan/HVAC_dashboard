@@ -1,20 +1,31 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg_provider/flutter_svg_provider.dart';
+// import 'dart:html';
+import 'dart:io';
 
-class Auto extends StatefulWidget {
-  Auto({Key? key, }) : super(key: key);
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg_provider/flutter_svg_provider.dart';
+import 'package:flutter_hvac/kuksa-server/vehicle-provider.dart';
+import 'package:flutter_hvac/kuksa-server/vehicle_methods.dart';
+
+import '../size.dart';
+
+class Auto extends ConsumerStatefulWidget {
+  WebSocket socket;
+  String serverPath;
+  Auto({
+    Key? key,
+    required this.serverPath,
+    required this.socket,
+  }) : super(key: key);
 
   @override
   _AutoState createState() => _AutoState();
 }
 
-class _AutoState extends State<Auto> with SingleTickerProviderStateMixin {
-  bool isFav = false;
-  bool radGrad = false;
+class _AutoState extends ConsumerState<Auto> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
+  late bool isAutoActive;
   late Animation<Color?> _colorAnimation;
-  late Animation<Color?> _colorAnimation2;
-
 
   @override
   void initState() {
@@ -25,27 +36,23 @@ class _AutoState extends State<Auto> with SingleTickerProviderStateMixin {
       vsync: this,
     );
 
-    _colorAnimation = ColorTween(begin: Colors.lightBlueAccent, end: Colors.white).animate(_controller);
-    _colorAnimation2 = ColorTween(begin: Colors.black, end: Colors.blueGrey).animate(_controller);
-
+    _colorAnimation =
+        ColorTween(begin: Colors.lightBlueAccent, end: Colors.white)
+            .animate(_controller);
 
     _controller.addListener(() {
       // print(_controller.value);
       // print(_colorAnimation.value);
     });
 
-    _controller.addStatusListener((status) {
-      if (status == AnimationStatus.completed) {
-        setState(() {
-          isFav = true;
-        });
-      }
-      if (status == AnimationStatus.dismissed) {
-        setState(() {
-          isFav = false;
-        });
-      }
-    });
+    // _controller.addStatusListener((status) {
+    //   if (status == AnimationStatus.completed) {
+    //     VISS.set(widget.socket, widget.serverPath, isAutoActive.toString());
+    //   }
+    //   if (status == AnimationStatus.dismissed) {
+    //     VISS.set(widget.socket, widget.serverPath, isAutoActive.toString());
+    //   }
+    // });
   }
 
   // dismiss the animation when widgit exits screen
@@ -57,23 +64,25 @@ class _AutoState extends State<Auto> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    isAutoActive = ref.watch(vehicleProvider).isAutoActive;
     return AnimatedBuilder(
         animation: _controller,
-        builder: (BuildContext context, _){
+        builder: (BuildContext context, _) {
           return InkWell(
-
             child: AnimatedContainer(
               constraints: BoxConstraints(
-                maxHeight: 150,
-                maxWidth: 160,
+                maxHeight: SizeConfig.screenHeight*0.10,
+                maxWidth: SizeConfig.screenWidth*0.15,
               ),
               // color: Colors.black, //background color of box
 
               decoration: BoxDecoration(
-                gradient: radGrad? RadialGradient(colors: [Colors.black,Colors.lightBlue],
+                gradient: isAutoActive
+                    ? RadialGradient(
+                  colors: [Colors.black, Colors.lightBlue],
                   radius: 2,
-                ) : null,
-
+                )
+                    : null,
 
                 // color: _colorAnimation2.value,
                 border: Border.all(
@@ -84,28 +93,30 @@ class _AutoState extends State<Auto> with SingleTickerProviderStateMixin {
               ),
               duration: Duration(seconds: 1),
               child: AnimatedContainer(
-                margin: EdgeInsets.fromLTRB(20, 26, 20, 26),
-
-
                 duration: Duration(milliseconds: 100),
-                child: Text('AUTO',style: TextStyle(
-                  color: _colorAnimation.value,
-                  fontWeight: FontWeight.w700,
-                  fontSize: 22,
-                ),
-
-
+                margin: EdgeInsets.all(SizeConfig.blockSizeVertical*2),
+                child: Container(
+                  width: SizeConfig.screenWidth*0.15,
+                  height: SizeConfig.screenHeight*0.10,
+                  child: FittedBox(
+                    fit: BoxFit.fill,
+                    child: Text(
+                      'AUTO',
+                      style: TextStyle(
+                        color: _colorAnimation.value,
+                        fontWeight: FontWeight.w700,
+                        // fontSize: SizeConfig.fontsize*4,
+                      ),
+                    ),
+                  ),
                 ),
               ),
-
-
             ),
-            onTap: (){
-              isFav ? _controller.reverse() : _controller.forward();
-              setState(() {
-                radGrad = !radGrad;
-              });
-
+            onTap: () {
+              isAutoActive ? _controller.reverse() : _controller.forward();
+              ref
+                  .read(vehicleProvider.notifier)
+                  .update(isAutoActive: !isAutoActive);
             },
           );
           // return IconButton(
@@ -118,7 +129,6 @@ class _AutoState extends State<Auto> with SingleTickerProviderStateMixin {
           //     isFav ? _controller.reverse() : _controller.forward();
           //   },
           // );
-        }
-    );
+        });
   }
 }

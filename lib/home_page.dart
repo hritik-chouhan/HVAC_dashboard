@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hvac/Buttons/fresh_air.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:flutter_hvac/Buttons/AC.dart';
 import 'package:flutter_hvac/Buttons/ac_on_face.dart';
@@ -140,6 +141,13 @@ class MyHome_Page extends StatelessWidget {
                         img: 'images/ac_on_face.svg',
                         socket: socket,
                       ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Auto(serverPath: '', socket: socket),
+                      SizedBox(width: SizeConfig.safeBlockHorizontal,),
+                      FreshAir(serverPath: '', socket: socket, img: 'images/wind_in.svg'),
                     ],
                   ),
                   Column(

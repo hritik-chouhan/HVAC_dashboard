@@ -90,7 +90,7 @@ class _AcOnFootState extends ConsumerState<AcOnFoot>
             child: AnimatedContainer(
               constraints: BoxConstraints(
                 maxHeight: SizeConfig.screenHeight*0.10,
-                maxWidth: SizeConfig.screenWidth*0.12,
+                maxWidth: SizeConfig.screenWidth*0.15,
               ),
               // color: Colors.black, //background color of box
 
@@ -114,7 +114,7 @@ class _AcOnFootState extends ConsumerState<AcOnFoot>
                 duration: Duration(milliseconds: 100),
                 margin: const EdgeInsets.all(10),
                 child: Image(
-                  width: SizeConfig.screenWidth*0.12,
+                  width: SizeConfig.screenWidth*0.15,
                   height: SizeConfig.screenHeight*0.10,
                   image: Svg(widget.img),
                   color: _colorAnimation.value,

@@ -6,6 +6,8 @@ class vehicle {
   late bool isAcDirectionDown;
   late bool isAcDirectionMiddle;
   late bool isRecirculationActive;
+  late bool isAutoActive;
+  late bool isFreshAirCirculateActive;
 
   vehicle({
     required this.isAcActive,
@@ -15,6 +17,8 @@ class vehicle {
     required this.isFrontDefrosterActive,
     required this.isRearDefrosterActive,
     required this.isRecirculationActive,
+    required this.isAutoActive,
+    required this.isFreshAirCirculateActive,
   });
 
   vehicle copywith({
@@ -25,6 +29,8 @@ class vehicle {
     bool? isFrontDefrosterActive,
     bool? isRearDefrosterActive,
     bool? isRecirculationActive,
+    bool? isAutoActive,
+    bool? isFreshAirCirculateActive,
   }) {
     return vehicle(
       isAcActive: isAcActive ?? this.isAcActive,
@@ -37,6 +43,9 @@ class vehicle {
           isRearDefrosterActive ?? this.isRearDefrosterActive,
       isRecirculationActive:
           isRecirculationActive ?? this.isRecirculationActive,
+      isAutoActive: isAutoActive ?? this.isAutoActive,
+      isFreshAirCirculateActive: isFreshAirCirculateActive ?? this.isFreshAirCirculateActive,
+
     );
   }
 }

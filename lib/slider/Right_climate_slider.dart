@@ -24,7 +24,7 @@ class ClimateSliderControlRight extends ConsumerWidget {
           onChanged: (value) {
             ref.read(RightSlider.notifier).update(value.toInt());
           },
-          activeColor: Colors.orangeAccent,
+          activeColor: Colors.lightBlueAccent,
           inactiveColor: Colors.white,
           thumbColor: Colors.blueAccent,
         ),

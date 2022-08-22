@@ -9,22 +9,24 @@ import 'package:flutter_hvac/kuksa-server/vehicle_methods.dart';
 
 import '../size.dart';
 
-class AC extends ConsumerStatefulWidget {
+class FreshAir extends ConsumerStatefulWidget {
   WebSocket socket;
   String serverPath;
-  AC({
+  String img;
+  FreshAir({
     Key? key,
     required this.serverPath,
     required this.socket,
+    required this.img,
   }) : super(key: key);
 
   @override
-  _ACState createState() => _ACState();
+  _FreshAirState createState() => _FreshAirState();
 }
 
-class _ACState extends ConsumerState<AC> with SingleTickerProviderStateMixin {
+class _FreshAirState extends ConsumerState<FreshAir> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
-  late bool isAcActive;
+  late bool isFreshAirCirculateActive;
   late Animation<Color?> _colorAnimation;
 
   @override
@@ -45,14 +47,14 @@ class _ACState extends ConsumerState<AC> with SingleTickerProviderStateMixin {
       // print(_colorAnimation.value);
     });
 
-    _controller.addStatusListener((status) {
-      if (status == AnimationStatus.completed) {
-        VISS.set(widget.socket, widget.serverPath, isAcActive.toString());
-      }
-      if (status == AnimationStatus.dismissed) {
-        VISS.set(widget.socket, widget.serverPath, isAcActive.toString());
-      }
-    });
+    // _controller.addStatusListener((status) {
+    //   if (status == AnimationStatus.completed) {
+    //     VISS.set(widget.socket, widget.serverPath, isAutoActive.toString());
+    //   }
+    //   if (status == AnimationStatus.dismissed) {
+    //     VISS.set(widget.socket, widget.serverPath, isAutoActive.toString());
+    //   }
+    // });
   }
 
   // dismiss the animation when widgit exits screen
@@ -64,7 +66,7 @@ class _ACState extends ConsumerState<AC> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    isAcActive = ref.watch(vehicleProvider).isAcActive;
+    isFreshAirCirculateActive = ref.watch(vehicleProvider).isFreshAirCirculateActive;
     return AnimatedBuilder(
         animation: _controller,
         builder: (BuildContext context, _) {
@@ -77,11 +79,11 @@ class _ACState extends ConsumerState<AC> with SingleTickerProviderStateMixin {
               // color: Colors.black, //background color of box
 
               decoration: BoxDecoration(
-                gradient: isAcActive
+                gradient: isFreshAirCirculateActive
                     ? RadialGradient(
-                        colors: [Colors.black, Colors.lightBlue],
-                        radius: 2,
-                      )
+                  colors: [Colors.black, Colors.lightBlue],
+                  radius: 2,
+                )
                     : null,
 
                 // color: _colorAnimation2.value,
@@ -91,32 +93,23 @@ class _ACState extends ConsumerState<AC> with SingleTickerProviderStateMixin {
                 ),
                 borderRadius: BorderRadius.circular(12),
               ),
-              duration: Duration(seconds: 1),
+              duration: const Duration(milliseconds: 500),
               child: AnimatedContainer(
                 duration: Duration(milliseconds: 100),
-                margin: EdgeInsets.all(SizeConfig.blockSizeVertical*2),
-                child: Container(
+                margin: const EdgeInsets.all(10),
+                child: Image(
                   width: SizeConfig.screenWidth*0.15,
                   height: SizeConfig.screenHeight*0.10,
-                  child: FittedBox(
-                    fit: BoxFit.fill,
-                    child: Text(
-                      'A/C',
-                      style: TextStyle(
-                        color: _colorAnimation.value,
-                        fontWeight: FontWeight.w700,
-                        // fontSize: SizeConfig.fontsize*4,
-                      ),
-                    ),
-                  ),
+                  image: Svg(widget.img),
+                  color: _colorAnimation.value,
                 ),
               ),
             ),
             onTap: () {
-              isAcActive ? _controller.reverse() : _controller.forward();
+              isFreshAirCirculateActive ? _controller.reverse() : _controller.forward();
               ref
                   .read(vehicleProvider.notifier)
-                  .update(isAcActive: !isAcActive);
+                  .update(isFreshAirCirculateActive: !isFreshAirCirculateActive);
             },
           );
           // return IconButton(
