@@ -52,9 +52,9 @@ class SliderControl extends ConsumerWidget {
         },
         min: 0,
         max: 100,
-        activeColor: Colors.blueAccent,
+        activeColor: Colors.green,
         inactiveColor: Colors.white70,
-        thumbColor: Colors.greenAccent,
+        thumbColor: Colors.grey,
         label: 'fan speed',
       ),
     );

@@ -38,7 +38,7 @@ class _AcOnFootState extends ConsumerState<AcOnFoot>
     );
 
     _colorAnimation =
-        ColorTween(begin: Colors.lightBlueAccent, end: Colors.white)
+        ColorTween(begin: Colors.lightBlueAccent, end: Colors.green)
             .animate(_controller);
 
     _controller.addListener(() {});

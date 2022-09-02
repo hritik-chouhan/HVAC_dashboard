@@ -39,7 +39,7 @@ class _FreshAirState extends ConsumerState<FreshAir> with SingleTickerProviderSt
     );
 
     _colorAnimation =
-        ColorTween(begin: Colors.lightBlueAccent, end: Colors.white)
+        ColorTween(begin: Colors.lightBlueAccent, end: Colors.green)
             .animate(_controller);
 
     _controller.addListener(() {

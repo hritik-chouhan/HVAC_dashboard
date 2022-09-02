@@ -42,7 +42,7 @@ class _CaustomButtonState extends ConsumerState<CaustomButton>
     );
 
     _colorAnimation =
-        ColorTween(begin: Colors.lightBlueAccent, end: Colors.white)
+        ColorTween(begin: Colors.blue, end: Colors.green)
             .animate(_controller);
 
     _controller.addListener(() {
@@ -112,7 +112,7 @@ class _CaustomButtonState extends ConsumerState<CaustomButton>
                     ? vehicledata.isFrontDefrosterActive
                         ? RadialGradient(
                             colors: [Colors.black, Colors.lightBlue],
-                            radius: 2,
+                            radius: 3,
                           )
                         : null
                     : widget.type == "Rear_defrost"
