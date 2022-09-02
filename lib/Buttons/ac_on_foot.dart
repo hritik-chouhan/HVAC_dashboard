@@ -98,7 +98,7 @@ class _AcOnFootState extends ConsumerState<AcOnFoot>
                 gradient: vehicledata.isAcDirectionDown
                     ? RadialGradient(
                         colors: [Colors.black, Colors.lightBlue],
-                        radius: SizeConfig.safeBlockVertical/2,
+                        radius: 2,
                       )
                     : null,
 

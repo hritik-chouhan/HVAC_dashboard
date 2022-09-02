@@ -112,14 +112,14 @@ class _CaustomButtonState extends ConsumerState<CaustomButton>
                     ? vehicledata.isFrontDefrosterActive
                         ? RadialGradient(
                             colors: [Colors.black, Colors.lightBlue],
-                            radius: 3,
+                            radius: 2,
                           )
                         : null
                     : widget.type == "Rear_defrost"
                         ? vehicledata.isRearDefrosterActive
                             ? RadialGradient(
                                 colors: [Colors.black, Colors.lightBlue],
-                                radius: SizeConfig.safeBlockVertical/2,
+                                radius: 2,
                               )
                             : null
                         : vehicledata.isRecirculationActive

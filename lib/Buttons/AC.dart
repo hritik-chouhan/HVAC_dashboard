@@ -80,7 +80,7 @@ class _ACState extends ConsumerState<AC> with SingleTickerProviderStateMixin {
                 gradient: isAcActive
                     ? RadialGradient(
                         colors: [Colors.black, Colors.lightBlue],
-                        radius: SizeConfig.safeBlockVertical/2,
+                        radius: 2,
                       )
                     : null,
 

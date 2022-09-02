@@ -97,7 +97,7 @@ class _AcOnFaceState extends ConsumerState<AcOnFace>
                 gradient: vehicledata.isAcDirectionUp
                     ? RadialGradient(
                         colors: [Colors.black, Colors.lightBlue],
-                        radius: SizeConfig.safeBlockVertical/2,
+                        radius: 2,
                       )
                     : null,
 

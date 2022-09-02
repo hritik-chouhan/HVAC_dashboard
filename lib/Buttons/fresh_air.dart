@@ -82,7 +82,7 @@ class _FreshAirState extends ConsumerState<FreshAir> with SingleTickerProviderSt
                 gradient: isFreshAirCirculateActive
                     ? RadialGradient(
                   colors: [Colors.black, Colors.lightBlue],
-                  radius: SizeConfig.safeBlockVertical/2,
+                  radius: 2,
                 )
                     : null,
 
