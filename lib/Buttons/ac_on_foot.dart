@@ -6,7 +6,6 @@ import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:flutter_hvac/kuksa-server/vehicle-provider.dart';
 
 import '../kuksa-server/vehicle-class.dart';
-import '../kuksa-server/vehicle_server_path.dart';
 import '../kuksa-server/vehicle_methods.dart';
 import '../size.dart';
 
@@ -92,7 +91,7 @@ class _AcOnFootState extends ConsumerState<AcOnFoot>
                 maxHeight: SizeConfig.screenHeight*0.10,
                 maxWidth: SizeConfig.screenWidth*0.15,
               ),
-              // color: Colors.black, //background color of box
+
 
               decoration: BoxDecoration(
                 gradient: vehicledata.isAcDirectionDown
@@ -102,7 +101,7 @@ class _AcOnFootState extends ConsumerState<AcOnFoot>
                       )
                     : null,
 
-                // color: _colorAnimation2.value,
+
                 border: Border.all(
                   color: Colors.white,
                   width: 2,
@@ -139,16 +138,7 @@ class _AcOnFootState extends ConsumerState<AcOnFoot>
 
             },
           );
-          // return IconButton(
-          //   icon: Icon(
-          //     Icons.favorite,
-          //     color: _colorAnimation.value,
-          //     size: 30,
-          //   ),
-          //   onPressed: () {
-          //     isOn ? _controller.reverse() : _controller.forward();
-          //   },
-          // );
+
         });
   }
 }

@@ -31,20 +31,14 @@ class ScrollContainerLeft extends ConsumerWidget {
     32
   ];
 
-  // late ItemScrollController _itemScrollController;
-  //  IntialScrollController(ItemScrollController itemScrollController){
-  //   _itemScrollController = itemScrollController;
-  //   return _itemScrollController;
-  // }
+
   final ItemScrollController itemScrollController = ItemScrollController();
   final ItemPositionsListener itemPositionsListener =
       ItemPositionsListener.create();
   @override
   Widget build(BuildContext context, ref) {
     int val = ref.watch(LeftSlider).toInt();
-    // _selected[val] = !_selected[val];
-    // print(_selected[val]);
-    // print(_selected[val+1]);
+
     VISS.set(socket, 'Vehicle.Cabin.HVAC.Station.Row1.Left.Temperature',
         mylist[val].toString());
     VISS.set(socket, 'Vehicle.Cabin.HVAC.Station.Row2.Left.Temperature',
@@ -83,7 +77,7 @@ class ScrollContainerLeft extends ConsumerWidget {
               itemBuilder: (context, index) {
                 return Container(
                   decoration: BoxDecoration(
-                    // color: _selected[val] ? Colors.white54 : null,
+
                     gradient: index == val
                         ? RadialGradient(
                             colors: [Colors.white54, Colors.black], radius: SizeConfig.safeBlockVertical*0.7)

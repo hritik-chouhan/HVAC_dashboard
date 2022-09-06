@@ -1,4 +1,3 @@
-// import 'dart:html';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -46,8 +45,7 @@ class _CaustomButtonState extends ConsumerState<CaustomButton>
             .animate(_controller);
 
     _controller.addListener(() {
-      // print(_controller.value);
-      // print(_colorAnimation.value);
+
     });
 
     _controller.addStatusListener((status) {
@@ -64,10 +62,9 @@ class _CaustomButtonState extends ConsumerState<CaustomButton>
           VISS.set(widget.socket, widget.serverPath,
               vehicledata.isRecirculationActive.toString());
         }
-        // if(widget.type == "isRecircultae"){
-        // VISS.set(widget.socket, widget.serverPath, vehicledata.isAcActive.toString());
 
-        // }
+
+
       }
       if (status == AnimationStatus.dismissed) {
         if (widget.type == 'Front_defrost') {
@@ -105,7 +102,7 @@ class _CaustomButtonState extends ConsumerState<CaustomButton>
                 maxHeight: SizeConfig.screenHeight*0.10,
                 maxWidth: SizeConfig.screenWidth*0.15,
               ),
-              // color: Colors.black, //background color of box
+
 
               decoration: BoxDecoration(
                 gradient: widget.type == "Front_defrost"
@@ -129,7 +126,7 @@ class _CaustomButtonState extends ConsumerState<CaustomButton>
                               )
                             : null,
 
-                // color: _colorAnimation2.value,
+
                 border: Border.all(
                   color: Colors.white,
                   width: 2,
@@ -173,16 +170,7 @@ class _CaustomButtonState extends ConsumerState<CaustomButton>
               }
             },
           );
-          // return IconButton(
-          //   icon: Icon(
-          //     Icons.favorite,
-          //     color: _colorAnimation.value,
-          //     size: 30,
-          //   ),
-          //   onPressed: () {
-          //     isFav ? _controller.reverse() : _controller.forward();
-          //   },
-          // );
+
         });
   }
 }

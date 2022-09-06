@@ -1,4 +1,3 @@
-// import 'dart:html';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -41,8 +40,7 @@ class _ACState extends ConsumerState<AC> with SingleTickerProviderStateMixin {
             .animate(_controller);
 
     _controller.addListener(() {
-      // print(_controller.value);
-      // print(_colorAnimation.value);
+
     });
 
     _controller.addStatusListener((status) {
@@ -74,7 +72,7 @@ class _ACState extends ConsumerState<AC> with SingleTickerProviderStateMixin {
                 maxHeight: SizeConfig.screenHeight*0.10,
                 maxWidth: SizeConfig.screenWidth*0.15,
               ),
-              // color: Colors.black, //background color of box
+
 
               decoration: BoxDecoration(
                 gradient: isAcActive
@@ -84,7 +82,7 @@ class _ACState extends ConsumerState<AC> with SingleTickerProviderStateMixin {
                       )
                     : null,
 
-                // color: _colorAnimation2.value,
+
                 border: Border.all(
                   color: Colors.white,
                   width: 2,
@@ -105,7 +103,7 @@ class _ACState extends ConsumerState<AC> with SingleTickerProviderStateMixin {
                       style: TextStyle(
                         color: _colorAnimation.value,
                         fontWeight: FontWeight.w700,
-                        // fontSize: SizeConfig.fontsize*4,
+
                       ),
                     ),
                   ),
@@ -119,16 +117,7 @@ class _ACState extends ConsumerState<AC> with SingleTickerProviderStateMixin {
                   .update(isAcActive: !isAcActive);
             },
           );
-          // return IconButton(
-          //   icon: Icon(
-          //     Icons.favorite,
-          //     color: _colorAnimation.value,
-          //     size: 30,
-          //   ),
-          //   onPressed: () {
-          //     isFav ? _controller.reverse() : _controller.forward();
-          //   },
-          // );
+
         });
   }
 }

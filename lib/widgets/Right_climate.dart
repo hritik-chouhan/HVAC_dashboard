@@ -31,11 +31,7 @@ class ScrollContainerRight extends ConsumerWidget {
     32,
   ];
 
-  // late ItemScrollController _itemScrollController;
-  //  IntialScrollController(ItemScrollController itemScrollController){
-  //   _itemScrollController = itemScrollController;
-  //   return _itemScrollController;
-  // }
+
   final ItemScrollController itemScrollController = ItemScrollController();
   final ItemPositionsListener itemPositionsListener =
       ItemPositionsListener.create();
@@ -43,10 +39,7 @@ class ScrollContainerRight extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ref) {
     int val = ref.watch(RightSlider).toInt();
-    // _selected[val] = !_selected[val];
-    // print(_selected[val]);
-    // print(_selected[val+1]);
-    // 'Vehicle.Cabin.HVAC.Station.Row1.Right.Temperature'
+
     VISS.set(socket, 'Vehicle.Cabin.HVAC.Station.Row1.Right.Temperature',
         mylist[val].toString());
     VISS.set(socket, 'Vehicle.Cabin.HVAC.Station.Row2.Right.Temperature',
@@ -60,9 +53,7 @@ class ScrollContainerRight extends ConsumerWidget {
           curve: Curves.easeInOutCubic,
           alignment: 1);
     }
-    // itemPositionsListener.itemPositions.addListener(
-    //   () => print(ItemPosition),
-    // );
+
 
     return SingleChildScrollView(
       child: SizedBox(
@@ -87,7 +78,7 @@ class ScrollContainerRight extends ConsumerWidget {
               itemBuilder: (context, index) {
                 return Container(
                   decoration: BoxDecoration(
-                    // color: _selected[val] ? Colors.white54 : null,
+
                     gradient: index == val
                         ? RadialGradient(
                             colors: [Colors.white54, Colors.black], radius: SizeConfig.safeBlockVertical*0.7)
@@ -108,9 +99,9 @@ class ScrollContainerRight extends ConsumerWidget {
                         ),
                       ),
                     ),
-                    // tileColor: Colors.red,
+
                     minVerticalPadding: 5,
-                    // selectedTileColor: ,
+
                   ),
                 );
               }),

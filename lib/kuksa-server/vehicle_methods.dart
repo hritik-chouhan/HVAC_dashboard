@@ -10,9 +10,7 @@ class VISS {
   static const requestId = "test-id";
   static void init(WebSocket socket) {
     authorize(socket);
-    subscribe(socket, VSPath.vehicleSpeed);
-    subscribe(socket, VSPath.vehicleEngineRPM);
-    subscribe(socket, VSPath.vehicleFuelLevel);
+
     subscribe(socket, VSPath.vehicleFrontLeftTier);
     subscribe(socket, VSPath.vehicleFrontRightTier);
     subscribe(socket, VSPath.vehicleRearLeftTier);
@@ -21,33 +19,15 @@ class VISS {
     subscribe(socket, VSPath.vehicleIsChildLockActiveRight);
     subscribe(socket, VSPath.vehicleCurrentLatitude);
     subscribe(socket, VSPath.vehicleCurrentLongitude);
-    subscribe(socket, VSPath.vehicleFuelRate);
     subscribe(socket, VSPath.vehicleInsideTemperature);
     subscribe(socket, VSPath.vehicleAmbientAirTemperature);
   }
 
   static void update(WebSocket socket) {
-    get(socket, VSPath.vehicleSpeed);
-    get(socket, VSPath.vehicleEngineRPM);
-    get(socket, VSPath.vehicleLeftIndicator);
-    get(socket, VSPath.vehicleRightIndicator);
-    get(socket, VSPath.vehicleFuelLevel);
-    get(socket, VSPath.vehicleCoolantTemp);
-    get(socket, VSPath.vehicleHazardLightOn);
-    get(socket, VSPath.vehicleHighBeamOn);
-    get(socket, VSPath.vehicleLowBeamOn);
-    get(socket, VSPath.vehicleSelectedGear);
-    get(socket, VSPath.vehiclePerformanceMode);
     get(socket, VSPath.vehicleAmbientAirTemperature);
-    get(socket, VSPath.vehicleParkingLightOn);
     get(socket, VSPath.vehicleTrunkLocked);
     get(socket, VSPath.vehicleTrunkOpen);
-    get(socket, VSPath.vehicleAmbientAirTemperature);
-    get(socket, VSPath.vehicleMIL);
-    get(socket, VSPath.vehicleCruiseControlError);
-    get(socket, VSPath.vehicleCruiseControlSpeedSet);
-    get(socket, VSPath.vehicleCruiseControlSpeedisActive);
-    get(socket, VSPath.vehicleBatteryChargingStatus);
+
     get(socket, VSPath.vehicleFrontLeftTier);
     get(socket, VSPath.vehicleFrontRightTier);
     get(socket, VSPath.vehicleRearLeftTier);
@@ -56,7 +36,6 @@ class VISS {
     get(socket, VSPath.vehicleIsChildLockActiveRight);
     get(socket, VSPath.vehicleCurrentLatitude);
     get(socket, VSPath.vehicleCurrentLongitude);
-    get(socket, VSPath.vehicleFuelRate);
     get(socket, VSPath.vehicleInsideTemperature);
   }
 

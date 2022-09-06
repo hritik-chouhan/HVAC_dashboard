@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:slider_controller/slider_controller.dart';
 import 'package:flutter_hvac/provider.dart';
 
 import '../kuksa-server/vehicle_methods.dart';
@@ -17,26 +16,7 @@ class SliderControl extends ConsumerWidget {
     return SizedBox(
       height: SizeConfig.safeBlockVertical*2,
       width: SizeConfig.screenWidth*0.5,
-      // child: SliderController(
-      //   value: 20,
-      //     onChanged: (value){
-      //           print(value);
-      //     },
 
-      //   min: 0.0,
-      //   max: 100.0,
-      //   sliderDecoration: SliderDecoration(
-      //     inactiveColor: Colors.white,
-      //     activeColor: Colors.orangeAccent,
-      //     thumbColor: Colors.white,
-      //     borderRadius: 5.0,
-      //     height: 10.0,
-      //     isThumbVisible: true,
-      //     thumbHeight: 9.0,
-      //     thumbWidth: 5.0,
-      //   ),
-
-      // ),
       child: Slider(
         value: ref.watch(fanSpeedProvider).toDouble(),
         onChanged: (value) {

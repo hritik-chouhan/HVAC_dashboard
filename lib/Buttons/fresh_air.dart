@@ -1,4 +1,3 @@
-// import 'dart:html';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -43,18 +42,10 @@ class _FreshAirState extends ConsumerState<FreshAir> with SingleTickerProviderSt
             .animate(_controller);
 
     _controller.addListener(() {
-      // print(_controller.value);
-      // print(_colorAnimation.value);
+
     });
 
-    // _controller.addStatusListener((status) {
-    //   if (status == AnimationStatus.completed) {
-    //     VISS.set(widget.socket, widget.serverPath, isAutoActive.toString());
-    //   }
-    //   if (status == AnimationStatus.dismissed) {
-    //     VISS.set(widget.socket, widget.serverPath, isAutoActive.toString());
-    //   }
-    // });
+
   }
 
   // dismiss the animation when widgit exits screen
@@ -76,7 +67,7 @@ class _FreshAirState extends ConsumerState<FreshAir> with SingleTickerProviderSt
                 maxHeight: SizeConfig.screenHeight*0.10,
                 maxWidth: SizeConfig.screenWidth*0.15,
               ),
-              // color: Colors.black, //background color of box
+
 
               decoration: BoxDecoration(
                 gradient: isFreshAirCirculateActive
@@ -112,16 +103,7 @@ class _FreshAirState extends ConsumerState<FreshAir> with SingleTickerProviderSt
                   .update(isFreshAirCirculateActive: !isFreshAirCirculateActive);
             },
           );
-          // return IconButton(
-          //   icon: Icon(
-          //     Icons.favorite,
-          //     color: _colorAnimation.value,
-          //     size: 30,
-          //   ),
-          //   onPressed: () {
-          //     isFav ? _controller.reverse() : _controller.forward();
-          //   },
-          // );
+
         });
   }
 }
