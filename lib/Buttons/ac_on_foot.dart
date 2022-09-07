@@ -68,7 +68,7 @@ class _AcOnFootState extends ConsumerState<AcOnFoot>
     });
   }
 
-  // dismiss the animation when widgit exits screen
+  // dismiss the animation when widget exits screen
   @override
   void dispose() {
     super.dispose();

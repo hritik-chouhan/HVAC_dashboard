@@ -46,7 +46,7 @@ class _AutoState extends ConsumerState<Auto> with SingleTickerProviderStateMixin
 
   }
 
-  // dismiss the animation when widgit exits screen
+  // dismiss the animation when widget exits screen
   @override
   void dispose() {
     super.dispose();

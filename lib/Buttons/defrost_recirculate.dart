@@ -83,7 +83,7 @@ class _CaustomButtonState extends ConsumerState<CaustomButton>
     });
   }
 
-  // dismiss the animation when widgit exits screen
+  // dismiss the animation when widget exits screen
   @override
   void dispose() {
     super.dispose();

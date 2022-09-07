@@ -53,7 +53,7 @@ class _ACState extends ConsumerState<AC> with SingleTickerProviderStateMixin {
     });
   }
 
-  // dismiss the animation when widgit exits screen
+  // dismiss the animation when widget exits screen
   @override
   void dispose() {
     super.dispose();

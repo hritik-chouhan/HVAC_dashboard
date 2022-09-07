@@ -48,7 +48,7 @@ class _FreshAirState extends ConsumerState<FreshAir> with SingleTickerProviderSt
 
   }
 
-  // dismiss the animation when widgit exits screen
+  // dismiss the animation when widget exits screen
   @override
   void dispose() {
     super.dispose();
