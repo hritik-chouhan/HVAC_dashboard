@@ -22,8 +22,7 @@ class _GetConfigState extends ConsumerState<GetConfig> {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       final configStateProvider = ref.read(ConfigStateprovider.notifier);
 
-      // String configFilePath = '/etc/xdg/AGL/nav_config.yaml';
-      String configFilePath = '/Users/Smart/Desktop/test/nav_config.yaml';
+      String configFilePath = '/etc/xdg/AGL/HVAC_config.yaml';
 
 
       final configFile = File(configFilePath);
