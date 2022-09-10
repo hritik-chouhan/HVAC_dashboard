@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 import 'dart:async';
 import 'dart:io';
 
@@ -25,10 +27,9 @@ class _OnBoardingPageState extends ConsumerState<OnBoardingPage> {
 
   @override
   void initState() {
-    print('onboarding');
     super.initState();
     _socket = widget.socket;
-    VISS.init(widget.socket);
+    VISS.init(widget.socket,ref);
     _timer = Timer.periodic(const Duration(seconds: 2), (timer) {
 
       if (widget.socket.readyState == 3) {

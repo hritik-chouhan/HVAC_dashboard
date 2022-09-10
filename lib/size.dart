@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -30,7 +32,6 @@ class SizeConfig {
     safeBlockVertical = (screenHeight - _safeAreaVertical) / 100;
     fontsize = screenHeight * screenWidth * 0.01 * 0.01 * 0.1;
     // fontsize= blockSizeVertical*2;
-    print(fontsize);
     normalfont = TextStyle(
       fontSize: fontsize,
       fontWeight: FontWeight.w700,

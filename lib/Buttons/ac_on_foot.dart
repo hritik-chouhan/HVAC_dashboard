@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -44,25 +46,25 @@ class _AcOnFootState extends ConsumerState<AcOnFoot>
 
     _controller.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
-        VISS.set(widget.socket,
+        VISS.set(widget.socket,ref,
             "Vehicle.Cabin.HVAC.Station.Row1.Left.AirDistribution", 'down');
-        VISS.set(widget.socket,
+        VISS.set(widget.socket,ref,
             "Vehicle.Cabin.HVAC.Station.Row1.Right.AirDistribution", 'down');
-        VISS.set(widget.socket,
+        VISS.set(widget.socket,ref,
             "Vehicle.Cabin.HVAC.Station.Row2.Left.AirDistribution", 'down');
-        VISS.set(widget.socket,
+        VISS.set(widget.socket,ref,
             "Vehicle.Cabin.HVAC.Station.Row2.Right.AirDistribution", 'down');
 
       }
 
       if (status == AnimationStatus.dismissed) {
-        VISS.set(widget.socket,
+        VISS.set(widget.socket,ref,
             "Vehicle.Cabin.HVAC.Station.Row1.Left.AirDistribution", 'middle');
-        VISS.set(widget.socket,
+        VISS.set(widget.socket,ref,
             "Vehicle.Cabin.HVAC.Station.Row1.Right.AirDistribution", 'middle');
-        VISS.set(widget.socket,
+        VISS.set(widget.socket,ref,
             "Vehicle.Cabin.HVAC.Station.Row2.Left.AirDistribution", 'middle');
-        VISS.set(widget.socket,
+        VISS.set(widget.socket,ref,
             "Vehicle.Cabin.HVAC.Station.Row2.Right.AirDistribution", 'middle');
       }
     });

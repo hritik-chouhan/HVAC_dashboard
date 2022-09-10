@@ -1,3 +1,7 @@
+
+// SPDX-License-Identifier: Apache-2.0
+
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -40,11 +44,10 @@ class ScrollContainerRight extends ConsumerWidget {
   Widget build(BuildContext context, ref) {
     int val = ref.watch(RightSlider).toInt();
 
-    VISS.set(socket, 'Vehicle.Cabin.HVAC.Station.Row1.Right.Temperature',
+    VISS.set(socket,ref, 'Vehicle.Cabin.HVAC.Station.Row1.Right.Temperature',
         mylist[val].toString());
-    VISS.set(socket, 'Vehicle.Cabin.HVAC.Station.Row2.Right.Temperature',
+    VISS.set(socket, ref,'Vehicle.Cabin.HVAC.Station.Row2.Right.Temperature',
         mylist[val].toString());
-    print(val);
 
     if (itemScrollController.isAttached) {
       itemScrollController.scrollTo(

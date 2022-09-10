@@ -1,8 +1,9 @@
+// SPDX-License-Identifier: Apache-2.0
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:flutter_hvac/kuksa-server/vehicle-provider.dart';
 import 'package:flutter_hvac/kuksa-server/vehicle_methods.dart';
 
@@ -45,10 +46,10 @@ class _ACState extends ConsumerState<AC> with SingleTickerProviderStateMixin {
 
     _controller.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
-        VISS.set(widget.socket, widget.serverPath, isAcActive.toString());
+        VISS.set(widget.socket, ref,widget.serverPath, isAcActive.toString());
       }
       if (status == AnimationStatus.dismissed) {
-        VISS.set(widget.socket, widget.serverPath, isAcActive.toString());
+        VISS.set(widget.socket, ref,widget.serverPath, isAcActive.toString());
       }
     });
   }

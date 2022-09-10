@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final LeftSlider = StateNotifierProvider<leftclimate, int>(

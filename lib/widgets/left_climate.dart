@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
@@ -39,12 +41,11 @@ class ScrollContainerLeft extends ConsumerWidget {
   Widget build(BuildContext context, ref) {
     int val = ref.watch(LeftSlider).toInt();
 
-    VISS.set(socket, 'Vehicle.Cabin.HVAC.Station.Row1.Left.Temperature',
+    VISS.set(socket,ref, 'Vehicle.Cabin.HVAC.Station.Row1.Left.Temperature',
         mylist[val].toString());
-    VISS.set(socket, 'Vehicle.Cabin.HVAC.Station.Row2.Left.Temperature',
+    VISS.set(socket,ref, 'Vehicle.Cabin.HVAC.Station.Row2.Left.Temperature',
         mylist[val].toString());
 
-    print(val);
 
     if (itemScrollController.isAttached) {
       itemScrollController.scrollTo(

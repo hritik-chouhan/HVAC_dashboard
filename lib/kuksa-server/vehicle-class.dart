@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 class vehicle {
   late bool isAcActive;
   late bool isFrontDefrosterActive;

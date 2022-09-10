@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -51,15 +53,15 @@ class _CaustomButtonState extends ConsumerState<CaustomButton>
     _controller.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
         if (widget.type == 'Front_defrost') {
-          VISS.set(widget.socket, widget.serverPath,
+          VISS.set(widget.socket,ref, widget.serverPath,
               vehicledata.isFrontDefrosterActive.toString());
         }
         if (widget.type == "Rear_defrost") {
-          VISS.set(widget.socket, widget.serverPath,
+          VISS.set(widget.socket,ref, widget.serverPath,
               vehicledata.isRearDefrosterActive.toString());
         }
         if (widget.type == "Recirculation") {
-          VISS.set(widget.socket, widget.serverPath,
+          VISS.set(widget.socket,ref, widget.serverPath,
               vehicledata.isRecirculationActive.toString());
         }
 
@@ -68,15 +70,15 @@ class _CaustomButtonState extends ConsumerState<CaustomButton>
       }
       if (status == AnimationStatus.dismissed) {
         if (widget.type == 'Front_defrost') {
-          VISS.set(widget.socket, widget.serverPath,
+          VISS.set(widget.socket, ref,widget.serverPath,
               vehicledata.isFrontDefrosterActive.toString());
         }
         if (widget.type == "Rear_defrost") {
-          VISS.set(widget.socket, widget.serverPath,
+          VISS.set(widget.socket, ref,widget.serverPath,
               vehicledata.isRearDefrosterActive.toString());
         }
         if (widget.type == "Recirculation") {
-          VISS.set(widget.socket, widget.serverPath,
+          VISS.set(widget.socket, ref,widget.serverPath,
               vehicledata.isRecirculationActive.toString());
         }
       }

@@ -1,57 +1,62 @@
+// SPDX-License-Identifier: Apache-2.0
+
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter_hvac/config.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_hvac/kuksa-server/vehicle_server_path.dart';
 
-import 'vehicle_config.dart';
 
 class VISS {
   static const requestId = "test-id";
-  static void init(WebSocket socket) {
-    authorize(socket);
+  static void init(WebSocket socket,WidgetRef ref) {
+    authorize(socket,ref);
 
-    subscribe(socket, VSPath.vehicleFrontLeftTier);
-    subscribe(socket, VSPath.vehicleFrontRightTier);
-    subscribe(socket, VSPath.vehicleRearLeftTier);
-    subscribe(socket, VSPath.vehicleRearRightTier);
-    subscribe(socket, VSPath.vehicleIsChildLockActiveLeft);
-    subscribe(socket, VSPath.vehicleIsChildLockActiveRight);
-    subscribe(socket, VSPath.vehicleCurrentLatitude);
-    subscribe(socket, VSPath.vehicleCurrentLongitude);
-    subscribe(socket, VSPath.vehicleInsideTemperature);
-    subscribe(socket, VSPath.vehicleAmbientAirTemperature);
+    subscribe(socket,ref, VSPath.vehicleFrontLeftTier);
+    subscribe(socket,ref, VSPath.vehicleFrontRightTier);
+    subscribe(socket,ref, VSPath.vehicleRearLeftTier);
+    subscribe(socket,ref, VSPath.vehicleRearRightTier);
+    subscribe(socket,ref, VSPath.vehicleIsChildLockActiveLeft);
+    subscribe(socket,ref, VSPath.vehicleIsChildLockActiveRight);
+    subscribe(socket,ref, VSPath.vehicleCurrentLatitude);
+    subscribe(socket,ref, VSPath.vehicleCurrentLongitude);
+    subscribe(socket,ref, VSPath.vehicleInsideTemperature);
+    subscribe(socket,ref, VSPath.vehicleAmbientAirTemperature);
   }
 
-  static void update(WebSocket socket) {
-    get(socket, VSPath.vehicleAmbientAirTemperature);
-    get(socket, VSPath.vehicleTrunkLocked);
-    get(socket, VSPath.vehicleTrunkOpen);
+  static void update(WebSocket socket,WidgetRef ref) {
+    get(socket,ref, VSPath.vehicleAmbientAirTemperature);
+    get(socket,ref, VSPath.vehicleTrunkLocked);
+    get(socket, ref,VSPath.vehicleTrunkOpen);
 
-    get(socket, VSPath.vehicleFrontLeftTier);
-    get(socket, VSPath.vehicleFrontRightTier);
-    get(socket, VSPath.vehicleRearLeftTier);
-    get(socket, VSPath.vehicleRearRightTier);
-    get(socket, VSPath.vehicleIsChildLockActiveLeft);
-    get(socket, VSPath.vehicleIsChildLockActiveRight);
-    get(socket, VSPath.vehicleCurrentLatitude);
-    get(socket, VSPath.vehicleCurrentLongitude);
-    get(socket, VSPath.vehicleInsideTemperature);
+    get(socket,ref, VSPath.vehicleFrontLeftTier);
+    get(socket,ref, VSPath.vehicleFrontRightTier);
+    get(socket,ref, VSPath.vehicleRearLeftTier);
+    get(socket,ref, VSPath.vehicleRearRightTier);
+    get(socket,ref, VSPath.vehicleIsChildLockActiveLeft);
+    get(socket,ref, VSPath.vehicleIsChildLockActiveRight);
+    get(socket,ref, VSPath.vehicleCurrentLatitude);
+    get(socket,ref, VSPath.vehicleCurrentLongitude);
+    get(socket,ref, VSPath.vehicleInsideTemperature);
   }
 
-  static void authorize(WebSocket socket) {
+  static void authorize(WebSocket socket,WidgetRef ref) {
+    final config = ref.read(ConfigStateprovider);
     Map<String, dynamic> map = {
       "action": "authorize",
-      "tokens": VehicleSignalConfig.authToken,
+      "tokens": config.kuksaAuthToken,
       "requestId": requestId
     };
     socket.add(jsonEncode(map));
   }
 
-  static void get(WebSocket socket, String path) {
+  static void get(WebSocket socket,WidgetRef ref ,String path) {
+    final config = ref.read(ConfigStateprovider);
+
     Map<String, dynamic> map = {
       "action": "get",
-      "tokens": VehicleSignalConfig.authToken,
+      "tokens": config.kuksaAuthToken,
       "path": path,
       "requestId": requestId
     };
@@ -60,12 +65,15 @@ class VISS {
 
   static void set(
     WebSocket socket,
+    WidgetRef ref,
     String path,
     String value,
   ) {
+    final config = ref.read(ConfigStateprovider);
+
     Map<String, dynamic> map = {
       "action": "set",
-      "tokens": VehicleSignalConfig.authToken,
+      "tokens": config.kuksaAuthToken,
       "path": path,
       "requestId": requestId,
       "value": value
@@ -73,28 +81,17 @@ class VISS {
     socket.add(jsonEncode(map));
   }
 
-  static void subscribe(WebSocket socket, String path) {
+  static void subscribe(WebSocket socket,WidgetRef ref, String path) {
+    final config = ref.read(ConfigStateprovider);
+
     Map<String, dynamic> map = {
       "action": "subscribe",
-      "tokens": VehicleSignalConfig.authToken,
+      "tokens": config.kuksaAuthToken,
       "path": path,
       "requestId": requestId
     };
     socket.add(jsonEncode(map));
   }
 
-  static String? numToGear(int? number) {
-    switch (number) {
-      case -1:
-        return 'R';
-      case 0:
-        return 'N';
-      case 126:
-        return 'P';
-      case 127:
-        return 'D';
-      default:
-        return null;
-    }
-  }
+
 }

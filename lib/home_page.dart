@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: Apache-2.0
+
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -10,6 +13,7 @@ import 'package:flutter_hvac/Buttons/defrost_recirculate.dart';
 import 'package:flutter_hvac/size.dart';
 import 'package:flutter_hvac/slider/Climate_slider.dart';
 import 'package:flutter_hvac/slider/Right_climate_slider.dart';
+
 import 'Buttons/auto.dart';
 import 'widgets/Right_climate.dart';
 import 'widgets/left_climate.dart';
@@ -22,8 +26,6 @@ class MyHome_Page extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
 
     return Scaffold(
       backgroundColor: Colors.black54,

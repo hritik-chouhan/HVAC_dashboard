@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -21,13 +23,13 @@ class SliderControl extends ConsumerWidget {
         value: ref.watch(fanSpeedProvider).toDouble(),
         onChanged: (value) {
           ref.read(fanSpeedProvider.notifier).update(value.toInt());
-          VISS.set(socket, 'Vehicle.Cabin.HVAC.Station.Row1.Left.FanSpeed',
+          VISS.set(socket, ref,'Vehicle.Cabin.HVAC.Station.Row1.Left.FanSpeed',
               value.toInt().toString());
-          VISS.set(socket, 'Vehicle.Cabin.HVAC.Station.Row1.Right.FanSpeed',
+          VISS.set(socket, ref,'Vehicle.Cabin.HVAC.Station.Row1.Right.FanSpeed',
               value.toInt().toString());
-          VISS.set(socket, 'Vehicle.Cabin.HVAC.Station.Row2.Left.FanSpeed',
+          VISS.set(socket, ref,'Vehicle.Cabin.HVAC.Station.Row2.Left.FanSpeed',
               value.toInt().toString());
-          VISS.set(socket, 'Vehicle.Cabin.HVAC.Station.Row2.Right.FanSpeed',
+          VISS.set(socket,ref, 'Vehicle.Cabin.HVAC.Station.Row2.Right.FanSpeed',
               value.toInt().toString());
         },
         min: 0,
